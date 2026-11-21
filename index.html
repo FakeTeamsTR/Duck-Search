@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duck Search</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+        body {
+            background-image: linear-gradient(to bottom, #c8c7ff, #a0d0ec, #1613e0);
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            background-attachment: fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        img.logo {
+            width: 65rem;
+            max-width: 90%;
+            height: auto;
+        }
+        input.searchhere {
+            width: 0;
+            max-width: 90%;
+            min-width: 0;
+            flex: 1;
+            height: 2rem;
+            max-height: 90%;
+            font-size: clamp(0.8rem, 1.6vw, 1.6rem);
+            font-family: Arial;
+            border: 0.2rem solid transparent;
+            border-radius: 10px;
+            background: linear-gradient(#f6f6ff, #f6f6ff) padding-box, linear-gradient(to right, #c8c7ff, #8482f5) border-box;
+            padding: 0 clamp(0.3rem, 1vw, 1rem);
+            box-sizing: border-box;
+        }
+        input.searchhere::placeholder {
+            color: #30c9c9;
+            opacity: 1;
+        }
+        input.searchhere:focus {
+            outline: none;
+        }
+        button.search {
+            font-family: Arial;
+            padding: clamp(0.15rem, 1vw, 0.4rem);
+            background: linear-gradient(#97f0fc, #97f0fc) padding-box, linear-gradient(to right, #cdf9ff, #c4c3ff) border-box;
+            border: 0.2rem solid transparent;
+            border-radius: 10px;
+            font-size: clamp(0.8rem, 2vw, 2rem);
+            flex: 0 1 auto;
+        }
+        .searcher {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(0.2rem, 0.5vw, 0.5rem);
+            width: 90%;
+            max-width: 65rem;
+        }
+        button.search:active {
+            background: linear-gradient(#6bcad6, #6bcad6) padding-box, linear-gradient(to right, #c3ecf1, #b8b7f0) border-box;
+        }
+    </style>
+</head>
+<body>
+    <img class="logo" src="assets/logo.png" alt="Duck Search Logo">
+    <div class="searcher">
+        <input class="searchhere" id="searchInput" type="text" placeholder="Search the web...">
+        <button class="search" id="searchButton">Search</button>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const searchButton = document.getElementById("searchButton");
+
+        function search() {
+            const query = searchInput.value.trim();
+
+            if (query === "") {
+                return;
+            }
+
+            const searchURL = "https://duckduckgo.com/?q=" + encodeURIComponent(query);
+
+            window.open(searchURL, "_blank");
+        }
+
+        searchButton.addEventListener("click", search);
+
+        searchInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                search();
+            }
+        });
+    </script>
+</body>
+</html>
